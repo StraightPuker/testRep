@@ -13,5 +13,5 @@ RUN pip install uvicorn
 # 애플리케이션 코드 복사
 COPY ./ /
 
-# 컨테이너 실행 시 명령어
+# 컨테이너 실행 시 명령어(순차적으로 실행되어진다)
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
