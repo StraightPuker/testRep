@@ -1,0 +1,27 @@
+name: Deploy to Kakao Object Storage
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install AWS CLI
+        run: |
+          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o awscliv2.zip
+          unzip awscliv2.zip
+          sudo ./aws/install
+
+      - name: Configure Kakao credentials
+        run: |
+          aws configure set aws_access_key_id ${{ secrets.KAKAO_ACCESS_KEY }}
+          aws configure set aws_secret_access_key ${{ secrets.KAKAO_SECRET_KEY }}
+          aws configure set default.region ap-northeast-2
+          aws configure set default.s3.endpoint-url https://kr.object.ncloudstorage.com
+
+      - name: Sync to Kakao Object Storage
+        run: aws s3 sync ./dist s3://ljh-bucket --endpoint-url https://kr.object.ncloudstorage.com --delete
