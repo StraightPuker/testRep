@@ -1,0 +1,8 @@
+{
+    "name": "matrix-ci-test",
+    "version": "1.0.0",
+    "scripts": {
+      "test": "echo \"Running dummy test...\" && exit 0"
+    }
+  }
+  
