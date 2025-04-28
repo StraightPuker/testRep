@@ -18,3 +18,4 @@ jobs:
 
       - name: Sync to Kakao Object Storage
         run: aws s3 sync ./dist s3://ljh-bucket --endpoint-url https://objectstorage.ap-northeast-2.kakaocloud.com --delete
+        
